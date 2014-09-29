@@ -1,0 +1,5 @@
+AddCharset UTF-8 .html
+# Redirect /joseph/resume.html /joseph/JosephSheedyResume.pdf
+Redirect /joseph/resume /joseph/JosephSheedyResume.pdf
+# Redirect /joseph/vette /joseph2011/vette
+Redirect /joseph2011 /joseph

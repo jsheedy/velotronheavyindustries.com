@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Velotron Heavy Industries :: Web applications, data collection, analysis, and presentation</title>
+    <link rel="stylesheet" href="../css/vhi.css?ver=19" type="text/css"/>
+    <link rel="shortcut icon" href="../images/velotron_crouch_155x155.png" />
+  </head>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script type="text/javascript" src="../js/vhi.js"></script>
+  <script type="text/javascript">
+    var clients = [
+          {url: "http://oneoceancorp.com", title: "OneOcean"},
+          {url: "http://www.fairplay.com/", title: "Fairplay"},
+          {url: "http://www.sound-data.com", title: "Sound Data Management"},
+          {url: "http://www.itgroove.net", title: "itgroove"},
+          {url: "http://www.artefactgroup.com", title: "Artefact"},
+          {url: "http://23rdandunion.org/", title: "The Corner"},
+          {url: "http://dimax.com", title: "DiMax, Inc"},
+          {url: "http://deucescracked.com", title: "Deuces Cracked"},
+          {url: "http://3tiergroup.com", title: "3TIER"},
+          {url: "http://armstrongphoto.com", title: "Armstrong Photo"},
+          {url: "http://clarityanalytical.com", title: "Clarity Analytical"},
+          {url: "http://bluyah.com", title: "bluyah"},
+          {url: "http://umbrellaconsulting.com", title: "Umbrella Consulting"}
+    ];
+    $(document).ready(function() {
+      $('#clients').bind('click', function(e) {
+        e.preventDefault();
+        var container = $('#clientcontainer');
+        container.html('');
+        for(var i=0; i<clients.length; i++) {
+          var client = clients[i];
+          var o = $("<div class='clientobject'>");
+          var a = $("<a>");
+          a.attr('href', client.url);
+          a.attr('target', "_blank");
+          a.html(client.title);
+          o.append(a);
+          container.append(o); 
+          o.animate({
+            width: 220,
+          }, Math.random()*800+200, function() {});
+        }
+      });
+        $('#contactlink2').bind('click', function(evt) {
+          evt.preventDefault();
+          $(this).unbind();
+          //var c = $('#contact2');
+          var c = $(this);
+          c.html('');
+          var a = $('<a id="maillink" target="_blank" href="mailto:">');
+          c.append(a);
+          var addr = ['j','o','s','e','p','h','@','v','e','l','o','t','r','o','n','h','e','a','v','y','i','n','d','u','s','t','r','i','e','s','.','c','o','m'];
+          xionType(a,addr);
+        });
+
+    });
+  </script>
+
+<body>
+    <div id="container">
+      <div id="clientcontainer" style="line-height: 2.0em; position: absolute; top: 100px; left: 527px;"></div>
+      <div id="header">
+          <a href="http://velotronheavyindustries.com">
+            <img width="250" id="logo" src="../images/velotron_heavy_industries_title_512.png" />
+          </a>
+      </div>
+      <div id="devcontent">
+        <p>
+            Velotron Heavy Industries provides solutions to 
+            information processing problems. 
+        </p>
+        <p>
+            We can handle your acquisition,
+            processing, storage, and presentation needs.  
+            With over a decade of experience, we fear no 
+            technology.  We'll throw down angular, ember, node, Oracle, PostGIS, NoSQL, iOS, Linux,
+            Ruby, Python, Java, C++, integrated circuits, 
+            FORTRAN, pencil and paper, or whatever is most contextually efficient.
+            Our toolbox is heavy and continually expanding.
+        </p>
+        <p>
+            In addition to ninja technical solutions, we pride ourselves on effective interaction with our <a href="#" id="clients"><b>clients</b></a>.  
+            If you or your team are in the Seattle area, let's get together 
+            in person to discuss your project.
+        </p>
+        <p>
+            <img width="200" src="../images/jls-signature2.png" />
+            <br />
+            Joseph Sheedy<br />
+            director, Velotron Heavy Industries
+        </p>
+        <p style=""> 
+          <!--
+          <i>joseph(at)velotronheavyindustries(dot)com</i>
+          -->
+        <a id="contactlink2" href="#">
+            Email
+        </a>
+          <br />
+          Phone: <a href="tel:206-799-5089">206-799-5089</a>
+        </p>
+      </div>
+      <div id="footer">
+      </div>
+    </div>
+</body>
+</html>

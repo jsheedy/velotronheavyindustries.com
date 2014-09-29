@@ -1,0 +1,349 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"d",
+				"div"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"i",
+				"Package Control: Install Package"
+			],
+			[
+				"p",
+				"Package Control: Install Package"
+			],
+			[
+				"mark",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"pack",
+				"Package Control: Disable Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"togg",
+				"View: Toggle Side Bar"
+			],
+			[
+				"toggle",
+				"View: Toggle Status Bar"
+			]
+		],
+		"width": 575.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/velotron/work/UW_Python/git/Python300-SystemDevelopmentWithPython-Spring-2014/week-04/SQL/slides/index.html",
+		"/Users/velotron/Library/Application Support/Sublime Text 3/Packages/Default/Default (OSX).sublime-keymap",
+		"/Users/velotron/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/Users/velotron/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/velotron/work/UW_Python/Python300-SystemDevelopmentWithPython-Fall-2014/week-03-debugging/examples/logging/worker.py",
+		"/Users/velotron/work/UW_Python/Python300-SystemDevelopmentWithPython-Fall-2014/week-03-debugging/examples/wikidef/api.py",
+		"/Users/velotron/work/UW_Python/Python300-SystemDevelopmentWithPython-Fall-2014/week-03-debugging/examples/wikidef/define.py",
+		"/Users/velotron/work/UW_Python/Python300-SystemDevelopmentWithPython-Fall-2014/week-03-debugging/slides/index.html",
+		"/Users/velotron/work/UW_Python/Python300-SystemDevelopmentWithPython-Fall-2014/week-03-debugging/examples/long_loop.py",
+		"/Users/velotron/work/UW_Python/Python300-SystemDevelopmentWithPython-Fall-2014/week-03-debugging/examples/wikidef/definitions.py",
+		"/Users/velotron/work/UW_Python/Python300-SystemDevelopmentWithPython-Fall-2014/week-03-debugging/examples/fib_iterator.py",
+		"/Users/velotron/work/UW_Python/Python300-SystemDevelopmentWithPython-Fall-2014/week-03-debugging/examples/logging/example1.py",
+		"/Users/velotron/Library/Application Support/Sublime Text 3/Packages/User/trailing_spaces.sublime-settings",
+		"/Users/velotron/work/UW_Python/git/Python300-SystemDevelopmentWithPython/lectures/10-01-2013_Debugging/slides/index.html",
+		"/Users/velotron/work/UW_Python/git/Python300-SystemDevelopmentWithPython/index.html",
+		"/Users/velotron/work/UW_Python/Python300-SystemDevelopmentWithPython-Fall-2014/week-02-unit-testing-2/examples/pep-8/Listing1.py",
+		"/Users/velotron/work/UW_Python/Python300-SystemDevelopmentWithPython-Fall-2014/week-02-unit-testing-2/examples/calculator/calculator.py",
+		"/Users/velotron/work/UW_Python/Python300-SystemDevelopmentWithPython-Fall-2014/week-02-unit-testing-2/examples/calculator/calculator_functions.py",
+		"/Users/velotron/Library/Application Support/Sublime Text 3/Packages/User/SublimeLinter.sublime-settings",
+		"/Users/velotron/work/UW_Python/Python300-SystemDevelopmentWithPython-Fall-2014/week-02-unit-testing-2/slides/index.html",
+		"/Users/velotron/work/UW_Python/Python300-SystemDevelopmentWithPython-Fall-2014/week-02-unit-testing-2/examples/calculator/calculator_test.py",
+		"/Users/velotron/work/UW_Python/Python300-SystemDevelopmentWithPython-Fall-2014/week-02-unit-testing-2/examples/context_manager/context_manager.py",
+		"/Users/velotron/work/UW_Python/Python300-SystemDevelopmentWithPython-Fall-2014/week-02-unit-testing-2/solutions/context_manager_exception_swallower.py",
+		"/Users/velotron/work/UW_Python/Python300-SystemDevelopmentWithPython-Fall-2014/week-02-unit-testing-2/examples/wikidef/wikidef_tests.py",
+		"/Users/velotron/work/UW_Python/Python300-SystemDevelopmentWithPython-Fall-2014/week-02-unit-testing-2/examples/selenium/selenium_test.py",
+		"/Users/velotron/work/UW_Python/Python300-SystemDevelopmentWithPython-Fall-2014/week-02-unit-testing-2/examples/wikidef/api.py",
+		"/Users/velotron/work/UW_Python/Python300-SystemDevelopmentWithPython-Fall-2014/week-02-unit-testing-2/examples/wikidef/wikidef_tests_with_mock.py",
+		"/Users/velotron/work/UW_Python/Python300-SystemDevelopmentWithPython-Fall-2014/week-01-unit-testing/examples/distutils/setup.py",
+		"/Users/velotron/work/UW_Python/Python300-SystemDevelopmentWithPython-Fall-2014/week-01-unit-testing/examples/wikidef/wikidef_tests_with_mock.py",
+		"/Users/velotron/work/UW_Python/Python300-SystemDevelopmentWithPython-Fall-2014/week-01-unit-testing/slides/index.html",
+		"/Users/velotron/work/UW_Python/Python300-SystemDevelopmentWithPython-Fall-2014/week-01/unit-testing/slides/index.html",
+		"/Users/velotron/work/UW_Python/Python300-SystemDevelopmentWithPython-Fall-2014/week-01/coverage/slides/index.html",
+		"/Users/velotron/work/UW_Python/Python300-SystemDevelopmentWithPython-Fall-2014/Syllabus.md",
+		"/Users/velotron/work/UW_Python/Python300-SystemDevelopmentWithPython-Fall-2014/week-01/pep8/slides/index.html",
+		"/Users/velotron/work/UW_Python/Python300-SystemDevelopmentWithPython-Fall-2014/week-01/coverage/examples/doctests.py",
+		"/Users/velotron/work/UW_Python/Python300-SystemDevelopmentWithPython-Fall-2014/week-01/unit-testing/examples/decorators/decorators.py",
+		"/Users/velotron/work/UW_Python/git/Python300-SystemDevelopmentWithPython/lectures/10-29-2013_Threading-and-Multiprocessing/examples/integrate/integrate_main_profiler.py",
+		"/Users/velotron/work/UW_Python/Python300-SystemDevelopmentWithPython-Fall-2014/README.md",
+		"/Users/velotron/work/UW_Python/git/Python300-SystemDevelopmentWithPython/lectures/10-01-2013_Debugging/examples/wikidef/.project",
+		"/Users/velotron/work/UW_Python/git/Python300-SystemDevelopmentWithPython/lectures/10-22-2013_C_extensions/examples/pure-c/add.c",
+		"/Users/velotron/work/UW_Python/Python300-SystemDevelopmentWithPython-Fall-2014/week-01/coverage/examples/calculator_test.py",
+		"/Users/velotron/work/UW_Python/git/Python300-SystemDevelopmentWithPython/lectures/10-08-2013_Databases/examples/createdb.py",
+		"/Users/velotron/work/UW_Python/Python300-SystemDevelopmentWithPython-Fall-2014/week-01/proposals/slides/index.html",
+		"/Users/velotron/work/UW_Python/git/Python300-SystemDevelopmentWithPython/lectures/10-22-2013_C_extensions/slides/index.html",
+		"/Users/velotron/work/UW_Python/git/Python300-SystemDevelopmentWithPython/lectures/09-24-2013_Unit-Testing-2/slides/index.html",
+		"/Users/velotron/work/UW_Python/git/Python300-SystemDevelopmentWithPython/lectures/09-24-2013_Unit-Testing-2/requirements.txt",
+		"/Users/velotron/bands/tubaluba/website/tubaluba.github.io/bin/json_to_sqlite.py",
+		"/Users/velotron/bands/tubaluba/website/tubaluba.github.io/js/calendar.js",
+		"/Users/velotron/bands/tubaluba/website/tubaluba.github.io/Gruntfile.js",
+		"/Users/velotron/bands/tubaluba/website/tubaluba.github.io/templates/calendar.handlebars",
+		"/Users/velotron/bands/tubaluba/website/tubaluba.github.io/bin/calendar_id.sh",
+		"/Users/velotron/bands/tubaluba/website/tubaluba.github.io/bin/sqlite_to_json.py",
+		"/Users/velotron/bands/tubaluba/website/tubaluba.github.io/js/jquery.mailme.js",
+		"/Users/velotron/bands/tubaluba/website/tubaluba.github.io/js/photos.js",
+		"/Users/velotron/bands/tubaluba/website/tubaluba.github.io/css/tubalubaband.css",
+		"/Users/velotron/bands/tubaluba/website/tubaluba.github.io/.htaccess",
+		"/Users/velotron/bands/tubaluba/website/tubaluba.github.io/index.html",
+		"/Users/velotron/bands/tubaluba/website/tubaluba.github.io/js/main.js",
+		"/Users/velotron/work/interview_problems/amazon/css/main.css",
+		"/Users/velotron/work/interview_problems/amazon/readme.txt",
+		"/Users/velotron/work/interview_problems/amazon/index.html",
+		"/Users/velotron/work/interview_problems/amazon/js/main.js",
+		"/Users/velotron/work/interview_problems/amazon/humans.txt",
+		"/Users/velotron/Library/Application Support/Sublime Text 3/Packages/User/Default (OSX).sublime-keymap",
+		"/Users/velotron/bands/tubaluba/website/tubaluba.github.io/templates/photos.handlebars",
+		"/Users/velotron/bands/tubaluba/website/tubaluba.github.io/tubaluba-calendar.json",
+		"/Users/velotron/bands/tubaluba/website/tubaluba.github.io/snippets/lightbox-main",
+		"/Users/velotron/project/mandelbrot/index.html",
+		"/Users/velotron/project/mandelbrot/js/main.js",
+		"/Users/velotron/project/mandelbrot/humans.txt",
+		"/Users/velotron/bands/tubaluba/website/tubaluba.github.io/js/calendar-template.js",
+		"/Users/velotron/Library/Application Support/Sublime Text 3/Packages/SublimeLinter/SublimeLinter.sublime-settings",
+		"/Users/velotron/Library/Application Support/Sublime Text 3/Packages/JSHint Gutter/.jshintrc",
+		"/Users/velotron/Library/Application Support/Sublime Text 3/Packages/JSLint/JSLint.sublime-settings"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"- ",
+			"-",
+			"#",
+			"jump",
+			"simple",
+			"ch",
+			"CountToTe",
+			"class",
+			"Pdb",
+			"voidspace",
+			"fixture",
+			"--distribute",
+			"class",
+			"title",
+			"package",
+			"Now",
+			"deprec",
+			"inging",
+			"introduction",
+			"@property",
+			"...",
+			"    ...",
+			"python",
+			"Python",
+			"python",
+			"Week",
+			"###",
+			"\n###",
+			"###",
+			"\n###",
+			"\"",
+			"              \"",
+			"time",
+			"get",
+			"venue",
+			"></script>",
+			"            <script type",
+			"            <",
+			"script",
+			"            <",
+			"gallery_widg",
+			"-webki",
+			"quotes",
+			"photo",
+			"car",
+			"carousel",
+			"src",
+			"photos",
+			"tick",
+			"ticket",
+			"box",
+			"booking",
+			"nav",
+			"lg",
+			"md",
+			"box",
+			"row",
+			"<!--",
+			"row",
+			"min",
+			"container",
+			"Math",
+			"Siam",
+			"templateSpec",
+			"time\":",
+			"id\": 16",
+			"id\": 18"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 124.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "velotronheavyindustries.com.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"",
+				"tubaluba.github.io/css/tubalubaband.css"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"~/bands/tubaluba/website/tubaluba.github.io/tubaluba.github.io.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+		],
+		"width": 392.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 402.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

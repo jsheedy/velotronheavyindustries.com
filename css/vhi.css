@@ -1,0 +1,131 @@
+
+* {
+  z-index: 2;
+}
+html {
+  height: 100%;
+  min-height: 917px;
+}
+body {
+  height: 100%;
+  text-decoration: none;
+  font-family: Verdana, Geneva, sans-serif;
+/*
+  background-image: linear-gradient(top, rgb(255,255,255) 0%, rgb(0,0,0) 100%);
+  background-image: -o-linear-gradient(top, rgb(255,255,255) 0%, rgb(0,0,0) 100%);
+  background-image: -moz-linear-gradient(top, rgb(255,255,255) 0%, rgb(0,0,0) 100%);
+  background-image: -webkit-linear-gradient(top, rgb(255,255,255) 0%, rgb(0,0,0) 100%);
+  background-image: -ms-linear-gradient(top, rgb(255,255,255) 0%, rgb(0,0,0) 100%);
+
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0, rgb(255,255,255)),
+    color-stop(1, rgb(0,0,0))
+  );
+*/
+  background-color: black;
+  min-height: 917px;
+  margin: 0px !important;
+}
+
+@-webkit-keyframes blinker {
+  from { opacity: 1.0; }
+  to { opacity: 0.0; }
+}
+#maillink {
+  font-size: 18pt;
+}
+#cursor {
+  -webkit-animation-name: blinker;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: cubic-bezier(1.0,0,0,1.0);
+  -webkit-animation-duration: .81s;
+}
+
+a {
+  text-decoration: none !important;
+  color: white;
+}
+#footer {
+  position:absolute;
+  bottom: 0px;
+  width: 100%;
+  height: 917px;
+  z-index: 1;
+  background-image: url('../images/ss1.jpg');
+}
+#container {
+  position:relative;
+  border: 0px solid red;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0px;
+  min-width: 512px;
+  height: 100%;
+  min-height: 917px;
+}
+#header {
+  position: relative;
+  margin: 20px;
+}
+.section {
+  position: relative;
+  z-index: 2;
+  font-size: 28pt;
+  width: 486px;
+  color: white;
+  margin: 20px;
+  background-color: rgba(0,0,0,.251);
+  padding: 10px;
+}
+#jlscontent {
+  position: relative;
+  z-index: 2;
+  font-size: 14pt;
+  width: 486px;
+  color: white;
+  margin: 20px;
+  background-color: rgba(0,0,0,.551);
+  padding: 10px;
+}
+#jlscontent ul{
+  list-style:none;
+}
+#portfoliocontent {
+  position: relative;
+  z-index: 2;
+  font-size: 14pt;
+  width: 486px;
+  color: white;
+  margin: 20px;
+  background-color: rgba(0,0,0,.551);
+  padding: 10px;
+}
+#devcontent {
+  position: relative;
+  z-index: 2;
+  font-size: 14pt;
+  width: 486px;
+  color: white;
+  margin: 20px;
+  background-color: rgba(0,0,0,.551);
+  padding: 10px;
+}
+.clientobject {
+ width: 0px;
+ /*
+ background-color: white;
+ */
+ color: black; 
+ font-size: 13pt; 
+ margin:4px;
+ padding: 2px;
+}
+.clientobject:hover {
+ background-color: #ddd;
+}
+.section:hover {
+  background-color: rgba(255,255,255,.151);
+}
