@@ -10,21 +10,6 @@ body {
   height: 100%;
   text-decoration: none;
   font-family: Verdana, Geneva, sans-serif;
-/*
-  background-image: linear-gradient(top, rgb(255,255,255) 0%, rgb(0,0,0) 100%);
-  background-image: -o-linear-gradient(top, rgb(255,255,255) 0%, rgb(0,0,0) 100%);
-  background-image: -moz-linear-gradient(top, rgb(255,255,255) 0%, rgb(0,0,0) 100%);
-  background-image: -webkit-linear-gradient(top, rgb(255,255,255) 0%, rgb(0,0,0) 100%);
-  background-image: -ms-linear-gradient(top, rgb(255,255,255) 0%, rgb(0,0,0) 100%);
-
-  background-image: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    color-stop(0, rgb(255,255,255)),
-    color-stop(1, rgb(0,0,0))
-  );
-*/
   background-color: black;
   min-height: 917px;
   margin: 0px !important;
@@ -34,9 +19,11 @@ body {
   from { opacity: 1.0; }
   to { opacity: 0.0; }
 }
+
 #maillink {
   font-size: 18pt;
 }
+
 #cursor {
   -webkit-animation-name: blinker;
   -webkit-animation-iteration-count: infinite;
@@ -115,11 +102,8 @@ a {
 }
 .clientobject {
  width: 0px;
- /*
- background-color: white;
- */
- color: black; 
- font-size: 13pt; 
+ color: black;
+ font-size: 13pt;
  margin:4px;
  padding: 2px;
 }

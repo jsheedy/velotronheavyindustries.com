@@ -24,7 +24,7 @@ function xionType(e,a) {
 
 $(document).ready(function() {
   foot = $('#footer');
-  
+
   setInterval(function() {
     var hue_string = hue + "deg";
     var val = "saturate( " + sat + ") hue-rotate( " + hue_string + ")";
