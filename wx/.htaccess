@@ -1,0 +1,11 @@
+# BEGIN Expire headers  
+<ifModule mod_expires.c>  
+        ExpiresActive On  
+        ExpiresDefault "access plus 5 seconds"  
+        ExpiresByType application/octet-stream "access plus 86400 seconds"  
+</ifModule>  
+# END Expire headers  
+
+<files *.dat>
+SetOutputFilter DEFLATE
+</files>

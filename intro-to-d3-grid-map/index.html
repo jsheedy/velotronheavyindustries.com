@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>d3-grid-map :: CUGOS January 20, 2016</title>
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/site.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+        <link href='https://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>d3-grid-map</h1>
+					<p>
+                        <a href="https://github.com/VulcanTechnologies/d3-grid-map" target="_blank">
+                        https://github.com/VulcanTechnologies/d3-grid-map</a>
+                    </p>
+					<p>
+                        A package for plotting gridded data sets with D3
+					</p>
+          <p>
+            January 20, 2016<br/>
+            Joseph Sheedy<br/>
+            <i>joseph.sheedy@gmail.com</i>
+          </p>
+				</section>
+                <section data-state="map1Show">
+                    <div class="ps2p">DEMO SCREEN</div>
+                    <div style="margin-left: 80px; zoom: 1; position: relative;">
+                        <div style="zoom: 1; width: 800px; height: 500px" id="map1"></div>
+                    </div>
+                </section>
+				<section>
+					<h2>Motivations</h2>
+					<ul>
+            <li>Needed to display gridded data calculated realtime on the server, with too many degrees of freedom to pregenerate before the heat death of the universe
+            <li>Non-mercator projections
+            <li>User selectable color maps
+            <li>Ability to query absolute grid values
+            <li>Simple universal data format
+					</ul>
+				</section>
+
+        <section>
+          <h2>Boot</h2>
+          <pre><code class="javascript">
+// Pass the constructor a selector
+// for the container element and
+// optionally an options object:
+
+var map = new d3.geo.GridMap('#map1', {});
+
+// call addLayer to add data.
+// It can be topojson, geojson,
+// or a Float32Array of gridded data:
+
+map.addLayer(countries);
+map.addLayer(dataArray, {gridSize: [720, 360]};
+          </code></pre>
+          </p>
+        </section>
+
+        <section>
+            <h2>Data Format</h2>
+            <p>only global regularly spaced lat/lon grids are supported (for now!)
+            <ul>
+                <li>The gridded data handled by addLayer is a one dimensional typed Float32Array
+                <li>The options argument must contain a gridSize attribute containing [width, height] in grid cells of the gridded data
+                <li>The grid is in row major order starting from [-180, 90] all the way to [180, -90]
+            </ul>
+        </section>
+
+        <section data-state="map2Show">
+            <div class="ps2p">GLOBAL GRID</div>
+            <div style="margin-left: 80px; zoom: 1; position: relative;">
+                <div style="zoom: 1; width: 800px; height: 500px" id="map2"></div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Transferring the data</h2>
+            <p>The original use case for GridMap was regularly spaced sparse arrays. Empty cells contain the value NaN.
+            <p>Arrays containing mostly a single value compress well, so it is easy to create the entire array in memory,
+            gzip it in transit, and have the JS client rehydrate it.
+            <p>
+            <pre><code class="javascript">
+d3.xhr('/data/provider')
+  .responseType('arraybuffer')
+  .get(function(error, xhr) {
+    var data = new Float32Array(xhr.response);
+    var layerOptions = {
+      gridSize: [w, h],
+    };
+    map.addLayer(data, layerOptions);
+  });
+            </code></pre>
+            </p>
+        </section>
+
+        <section>
+            <h2>Server side</h2>
+            <p>So the data format is just a stream of (width * height * 4) bytes, 4 bytes per grid cell
+            <p>The simple definition of the data format makes server support easy.  Assume you have
+            a 2-d numpy array:
+            <pre><code class="python">
+# fake some data, this is just a numpy array
+data = np.random.rand(360, 720).astype(np.float32)
+# that's it, ship it
+return data.tobytes()
+            </code></pre>
+             </p>
+            <p>
+            <i class="fa fa-exclamation-triangle"></i>
+            Javascript typed arrays use native byte order. x86 is little <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Glossary/Endianness">endian</a>,
+            and if you're using it on server and client side you're golden. This could be handled, but isn't yet. Headsup.
+            </p>
+        </section>
+
+        <section>
+                <p>Grids are drawn on canvas elements by
+                <ul>
+                  <li><a target="_blank" href="https://github.com/VulcanTechnologies/d3-grid-map/blob/master/src/layer.js#L49">scanning through every pixel</a>
+                  <li>calculate an inverse projection from screen coordinates (x,y) to geographic coordinates (lon, lat)
+                  <li>translate geographic coordinates to grid index
+                </p>
+        </section><section>
+                <p>
+                The most expensive part of this is the projection function. If we have multiple grid layers, this calculation needs only be done once for
+                each pixel, so the screen-to-grid coordinates mapping is cached. This enables <a target="_blank" href="http://www.velotronheavyindustries.com/wx/">almost reasonably efficient animation</a>.
+                </p>
+        </section><section>
+                <p>Not every projection (actually, most I tried) in the <a target="_blank" href="https://github.com/d3/d3-geo-projection">massive set of d3 projections</a> has a well defined,
+                <a target="_blank" href="http://mathworld.wolfram.com/Bijective.html">bijective</a> inverse. Effects range from artifacts outside the sphere to
+                disfunctionality.
+                </p>
+
+        </section>
+
+        <section>
+            <h2>Hotrodding </h2>
+            <p>GridMap is right on the cusp of being fast enough. How to make it faster?
+            <ul>
+                <li>The inverse projection calculation is embarrassingly parallel, so Web Workers might reduce time by a factor of N CPUs. A custom d3 build
+                which doesn't depend on the DOM may be required.
+                <li>Run the calculations on the GPU. The projection functions would have to be rewritten.
+                <li>The data payload isn't small for nonsparse arrays. Additional compression might be useful.
+                <li>Your ideas??
+            </ul>
+        </section>
+
+
+        <section>
+            <h2>Hacking</h2>
+            <p>Fork
+	<p>
+                <a href="https://github.com/VulcanTechnologies/d3-grid-map" target="_blank">
+                https://github.com/VulcanTechnologies/d3-grid-map</a>
+            </p>
+            <p>then
+            <pre><code class="bash">
+% make develop
+            </code></pre>
+            <p>When you're ready to commit, run "make" to do a final build
+        </section>
+
+        <section>
+            <p class="ps2p">THE END</p>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+		<script src="bower_components/d3/d3.min.js"></script>
+		<script src="bower_components/d3-geo-projection/d3.geo.projection.min.js"></script>
+		<script src="bower_components/topojson/topojson.js"></script>
+		<script src="js/d3-grid-map.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+                slideNumber: true,
+				history: true,
+				center: true,
+
+				transition: 'convex', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+    Reveal.addEventListener( 'map1Show', function() {
+        console.log('showing map1');
+        setTimeout(function() {
+            map1.resize(800,500);
+        }, 1000);
+}, false );
+    Reveal.addEventListener( 'map2Show', function() {
+        console.log('showing map2');
+        setTimeout(function() {
+            map2.resize(800,500);
+        }, 1000);
+}, false );
+
+
+        function drawMap() {
+
+          setTimeout(function() {
+              var w = 720;
+              var h = 360;
+                //projection: d3.geo.orthographic(),
+                //seaColor: 'rgba(255,255,255,1)',
+              var options = {
+                scale: 120,
+                longitude: -125,
+                legend: false,
+                hud: {
+                  fontSize: 20,
+                  fontColor: 'white',
+                  verticalOffset: 5
+                },
+                onCellHover: function(feature) { console.log('hovering over ', feature);}
+              };
+              var quantileScale = d3.scale.quantile()
+                .range(["#a50026","#d73027","#f46d43","#fdae61","#fee08b","#d9ef8b","#a6d96a","#66bd63","#1a9850","#006837"]);
+              // add a topojson base layer to the maps
+              var map1 = new d3.geo.GridMap('#map1', options);
+              var map2 = new d3.geo.GridMap('#map2', {
+                projection: d3.geo.orthographic().clipAngle(90),
+                seaColor: 'black',
+                graticule: d3.geo.graticule()
+                  .minorStep([.5,.5])
+                  .minorExtent([[-180, -90], [180, 90]])()
+               });
+              map1.resize(800, 500);
+              map2.resize(800, 500);
+              window.map1 = map1;
+              window.map2 = map2;
+
+              d3.json('data/countries.topojson', function(error, countries) {
+                map1.addLayer(countries);
+                map2.addLayer(countries, {fillColor: 'red'});
+              });
+
+              // add a packed binary data set to a map
+              d3.xhr('data/float32.dat')
+                .responseType('arraybuffer')
+                .get(function(error, xhr) {
+                  var data = new Float32Array(xhr.response);
+                  quantileScale.domain(data);
+                  var layerOptions = {
+                    gridSize: [w, h],
+                    zIndex: 3,
+                    renderOnAnimate: false,
+                    colorScale: quantileScale
+                  };
+                  map1.addLayer(data, layerOptions);
+
+                  layerOptions.colorScale = d3.scale.threshold()
+                    .domain([1e-8, 1e-7, 1e-6, 1e-5, 1e-4, 1e-3, 1e-2, 1e-1])
+                    .range(['#fff7ec','#fee8c8','#fdd49e','#fdbb84','#fc8d59','#ef6548','#d7301f','#b30000', '#7f0000']);
+                  layerOptions.colorScaleDiscrete = true;
+                });
+                // window.requestAnimationFrame(window.map2rotate);
+                // setInterval(map2rotate, 500);
+
+          }, 400);
+            }
+            drawMap();
+            var rotation=0;
+            window.map2rotate = function() {
+              console.log('anim');
+              rotation += 1;
+              map2.projection.rotate([rotation, 0]);
+              map2.draw();
+              // requestAnimationFrame(window.map2rotate);
+            }
+		</script>
+
+	</body>
+</html>

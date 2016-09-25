@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <style type="text/css">
+            .map {
+                width: 95%;
+                margin-left:auto;
+                margin-right:auto;
+                height: 800px;
+                border: 1px solid black;
+                position: relative;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="map" id="map"></div>
+        <label for="forecast_hour">forecast hour: 0</label>
+        <input type="range" id="forecast_hour" min="0" value="0" max="141" step="3">
+
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+        <script src="https://cdn.rawgit.com/d3/d3-geo-projection/master/d3.geo.projection.js"></script>
+        <script src="https://cdn.rawgit.com/mbostock/topojson/master/topojson.js"></script>
+        <script src="d3-grid-map/d3-grid-map.js"></script>
+
+        <script type="text/javascript">
+
+          var w = 720;
+          var h = 360;
+          // var colorScale = d3.scale.log().domain([4800,5900]).range(['black', 'white']);
+          function colorScaleFactory() {
+            var thresholds = [4000, 4250, 4500, 4750, 5000, 5250, 5500, 5750, 6000];
+            var colors = ['#ffffe5','#fff7bc','#fee391','#fec44f','#fe9929','#ec7014','#cc4c02','#993404','#662506'];
+            for (var i=0; i<colors.length; i++) {
+              var color = d3.rgb(colors[i]);
+              var colorInt = (255 << 24) |
+                                   (color.b << 16) |
+                                   (color.g << 8) |
+                                   color.r;
+              colors[i] = colorInt;
+            }
+            return function(value) {
+              var color = colors[colors.length-1];
+              for (var i=0; i<thresholds.length-1; i++) {
+                if (value <= thresholds[i]) {
+                  color = colors[i];
+                  break;
+                }
+              }
+              return color;
+            }
+          }
+          var colorScale = colorScaleFactory();
+
+          var options = {
+            colorScale: colorScale,
+            hud: {
+              fontSize: 20,
+              fontColor: 'white',
+              verticalOffset: 5
+            },
+            scale: 190,
+            onCellHover: function(feature) { console.log('hovering over ', feature);},
+            legend: false
+          };
+          function progress() {
+            console.log(arguments);
+          }
+          var map = new d3.geo.GridMap('#map', options);
+          var getHour = function(hour) {
+            return function() {
+              var hs = d3.format('03d')(hour);
+              d3.xhr('data/' + hs + '.dat')
+                .responseType('arraybuffer')
+                .on('progress', progress)
+                .get(function(error, xhr) {
+                  setTimeout(function() {
+                    var data = new Float32Array(xhr.response);
+                    map.colorScale.domain(d3.extent(data));
+                    var layerOptions = {gridSize: [w, h], zIndex: 2, renderOnAdd: false, renderOnAnimate: false};
+                    var layer = map.addLayer(data, layerOptions);
+                    layer.name = hour | 0;
+                  },100);
+                });
+            }
+          };
+
+          // get all
+          var hour=0;
+          var buff=null;
+          var layerOptions = {gridSize: [w, h], zIndex: 2, renderOnAdd: false, renderOnAnimate: false};
+
+          // function draw() {
+          //   var byteLength = 4*360*720;
+          //   var byteOffset = ((hour/3) * byteLength) | 0 ;
+          //   var data = new Float32Array(buff, byteOffset, byteLength);
+          //   var layer = map.addLayer(data, layerOptions);
+          //   layer.name = hour;
+          //   hour += 3;
+          //   if (hour < 140) {
+          //     draw();
+          //   }
+          // }
+          d3.xhr('data/all.dat')
+            .responseType('arraybuffer')
+            .get(function(error, xhr) {
+              setTimeout(function() {
+
+                for (var hour=0; hour < 142; hour+=3) {
+                  var recordLength = 360*720;
+                  var byteOffset = ((hour/3) * 4 * recordLength) | 0 ;
+                  var data = new Float32Array(xhr.response, byteOffset, recordLength);
+                  var layer = map.addLayer(data, layerOptions);
+                  layer.name = hour;
+                }
+              }, 100);
+            });
+          // for (var hour=0; hour < 138; hour+=3) {
+          //   // getHour(hour)();
+          // }
+          d3.json('d3-grid-map/data/countries.json', function(error, countries) {
+            map.addLayer(countries, {fillColor: 'rgba(100,100,100,.5)', zIndex:1});
+          });
+
+
+          d3.select('#forecast_hour').on('input', function() {
+            var value = d3.select('#forecast_hour').node().value;
+            var label = 'forecast hour: ' + (value|0);
+            d3.select('label[for=forecast_hour]').html(label)
+            for (var i=0; i<map.layers.length; i++) {
+              var layer = map.layers[i];
+              if (layer.name == (value |0)) {
+                layer.show();
+              } else if (layer.grid) {
+                layer.hide();
+              }
+            }
+          });
+        </script>
+    </body>
+</html>
+
